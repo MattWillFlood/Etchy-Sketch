@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Ubuntu&display=swap');
+
+.header {
+    color: rgb(80, 240, 252);
+    text-align: center;
+    font-size: 30pt;
+    font-family: "Audiowide", sans-serif;    
+}
+
+body {
+    align-content: center;
+    background-color: rgb(182, 53, 2);
+    padding: 50px;
+}
+
+.griddy {
+    flex-direction: column;
+    border: 10px solid black;
+    align-items: stretch;
+    max-height: 80vmax;
+}
+
+div {
+    display: flex; 
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.row {
+    align-content: center;
+    align-items: stretch;
+}
+
+.square {
+    background-color: white;
+    border: 0px solid  rgb(184, 133, 113);; 
+    aspect-ratio: 1 / 1;
+    flex: 1 1 0;
+}
