@@ -10,11 +10,13 @@ const body = document.body;
 let square_toggle = false;
 let rb_toggle = false;
 let dark_toggle = false;
-let painter = 'black';
-const BODCOL = `rgb(182, 53, 2)`;
-let col = 'white'
+let painter = 'black';  // cell painter
+const BODCOL = `rgb(182, 53, 2)`;  // body color for dark mode
+let col = 'white'       // cell base colour (always opposite of painter)
 let bcol = BODCOL;
 let boxes = 50;
+
+drawgrid(boxes);
 
 griddy.addEventListener('mousedown', () => square_toggle = true);
 griddy.addEventListener('mouseup', () => square_toggle = false);
@@ -22,9 +24,10 @@ griddy.addEventListener('mouseup', () => square_toggle = false);
 clear.classList.add('rainbow');
 clear.innerHTML = "Clear Grid";
 clear.addEventListener('click', () => {
-    let grid_all = griddy.querySelectorAll("*")
-    dark_toggle ? col = 'black' : {}; 
-    grid_all.forEach((element) => element.style.backgroundColor = col);
+    dark_toggle ? col = 'black' : col = 'white'; 
+    drawgrid(boxes);   
+    // let grid_all = griddy.querySelectorAll("*")
+    //grid_all.forEach((element) => element.style.backgroundColor = col);
 })
 
 darky.classList.add('rainbow');
@@ -37,6 +40,9 @@ darky.addEventListener('click', () => {
         painter = 'black';
         bcol = BODCOL;
         griddy.style.borderColor = 'black';
+
+        drawgrid(boxes);   
+
     } else {
         dark_toggle = true; 
         darky.innerHTML = 'Light Mode';
@@ -44,20 +50,23 @@ darky.addEventListener('click', () => {
         bcol = 'grey';
         griddy.style.borderColor = 'white';
         painter = 'white';
+
+        drawgrid(boxes);   
+
     }
 
+    /*
     let grid_all = griddy.querySelectorAll("*")
     grid_all.forEach((element) => {
         element.style.backgroundColor = col;
     });
-
+    */
     body.style.backgroundColor = bcol;
 })
 
 rainbow.classList.add("rainbow")
 //rainbow.style.cssText = `color: ${randcol()}; background-color: ${randcol()}`;
 //rainbow.innerHTML = 'Rainbow';
-rainbow.innerHTML = ''; 
 rainbow.appendChild(rainy()) 
 rainbow.addEventListener('click', () => {
     if (rb_toggle===false) {
@@ -67,9 +76,13 @@ rainbow.addEventListener('click', () => {
         background-color: rgb(255, 255, 255)`;
     } else {
         rb_toggle = false; 
-        rainbow.innerHTML = ''; 
         rainbow.appendChild(rainy())       
     }
+
+    console.log(painter)
+    console.log(rb_toggle)
+    console.log(dark_toggle)
+
 }
 )
 
@@ -77,7 +90,7 @@ boxcount.classList.add("rainbow");
 boxcount.style.cssText = `min-width: 50px;
             max-height: 20px;
             font-size: 12pt;`
-boxcount.placeholder = `Enter Grid Size (10-100)`;
+boxcount.placeholder = `Change Grid Size (10-100)`;
 boxcount.addEventListener('input', () => {
     boxes = boxcount.value;
     if (boxes>9 && boxes<=100) {
@@ -97,12 +110,12 @@ bottom.style.gap = '60px';
 function drawgrid(boxes) {
     griddy.innerHTML = '';
     for (let i = 1; i <= boxes; i++) {
-
         let row = document.createElement('div');
         for (let k = 1; k <= boxes; k++) {
             let column = document.createElement('div');
             column.classList.add("square")
             column.style.Height = (600/boxes)+'px'
+            column.style.backgroundColor = col;
             row.appendChild(column)    
             column.addEventListener('mouseover', () => {
                 rb_toggle==true ? painter = randcol() : {}; //painter = col;
@@ -116,6 +129,8 @@ function drawgrid(boxes) {
 function randcol() {return `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;}
 
 function rainy() {
+    rainbow.innerHTML = ''; 
+
     const RBOW = document.createElement('span');
     for (const letter of 'Rainbow') {
         const span = document.createElement('span');
@@ -123,7 +138,6 @@ function rainy() {
         span.style.color = randcol(); // Set a random color
         RBOW.appendChild(span);
     }
-
     return RBOW;
 }
 
