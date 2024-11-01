@@ -36,55 +36,31 @@ darky.addEventListener('click', () => {
     if (dark_toggle) {
         dark_toggle = false; 
         darky.innerHTML = 'Dark Mode';
-        col = 'white'; 
-        painter = 'black';
-        bcol = BODCOL;
+        col = 'white';     painter = 'black';       bcol = BODCOL;
         griddy.style.borderColor = 'black';
-
-        drawgrid(boxes);   
-
     } else {
         dark_toggle = true; 
         darky.innerHTML = 'Light Mode';
-        col = 'black';
-        bcol = 'grey';
+        col = 'black';   bcol = 'grey';          painter = 'white';
         griddy.style.borderColor = 'white';
-        painter = 'white';
-
-        drawgrid(boxes);   
-
     }
-
-    /*
-    let grid_all = griddy.querySelectorAll("*")
-    grid_all.forEach((element) => {
-        element.style.backgroundColor = col;
-    });
-    */
+    drawgrid(boxes);   
     body.style.backgroundColor = bcol;
 })
 
 rainbow.classList.add("rainbow")
-//rainbow.style.cssText = `color: ${randcol()}; background-color: ${randcol()}`;
-//rainbow.innerHTML = 'Rainbow';
 rainbow.appendChild(rainy()) 
 rainbow.addEventListener('click', () => {
     if (rb_toggle===false) {
-        rb_toggle = true; rainbow.innerHTML = 'Normal';
-        //rainbow.classList.add('rainbow');
+        rb_toggle = true; rainbow.innerHTML = 'B + W';
         rainbow.style.cssText = `color: rgb(0, 0, 0);
         background-color: rgb(255, 255, 255)`;
     } else {
         rb_toggle = false; 
-        rainbow.appendChild(rainy())       
+        rainbow.appendChild(rainy())  
+        dark_toggle ? painter = 'white' : painter = 'black';  
     }
-
-    console.log(painter)
-    console.log(rb_toggle)
-    console.log(dark_toggle)
-
-}
-)
+})
 
 boxcount.classList.add("rainbow");
 boxcount.style.cssText = `min-width: 50px;
@@ -118,7 +94,7 @@ function drawgrid(boxes) {
             column.style.backgroundColor = col;
             row.appendChild(column)    
             column.addEventListener('mouseover', () => {
-                rb_toggle==true ? painter = randcol() : {}; //painter = col;
+                rb_toggle==true ? painter = randcol() : {};
                 square_toggle==true ? column.style.backgroundColor = painter : {};
             })        
         }    
@@ -130,7 +106,6 @@ function randcol() {return `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(M
 
 function rainy() {
     rainbow.innerHTML = ''; 
-
     const RBOW = document.createElement('span');
     for (const letter of 'Rainbow') {
         const span = document.createElement('span');
@@ -140,12 +115,3 @@ function rainy() {
     }
     return RBOW;
 }
-
-/* function darkmode(xcol) {
-    let temp = xcol.split(/[(),]/);
-    temp[1] = 255 - temp[1]
-    temp[2] = 255 - temp[2]
-    temp[3] = 255 - temp[3]
-
-    return 'rgb('+temp.slice(1,4).join()+')'
-} */
