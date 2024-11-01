@@ -2,9 +2,10 @@
 
 .header {
     color: rgb(80, 240, 252);
-    text-align: center;
+    text-align: left;
     font-size: 25pt;
     font-family: "Audiowide", sans-serif;    
+    flex: 1;
 }
 
 body {
@@ -27,7 +28,7 @@ div {
 .griddy {
     flex-direction: column;
     border: 10px solid black;
-    height: 800px;
+    height: 600px;
     aspect-ratio: 1 / 1;
     margin-bottom: 20px;
 }
@@ -47,4 +48,11 @@ div {
     font-family: "Audiowide", sans-serif;  
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
+}
+
+.toppy {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
 }
